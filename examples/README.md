@@ -26,6 +26,7 @@ Our examples cover the following tasks:
 | Multiple-Choice      |                                                 [SWAG](https://github.com/pomonam/kronfluence/tree/main/examples/swag)                                                  |
 | Summarization        |                              [CNN/DailyMail](https://github.com/pomonam/kronfluence/tree/main/examples/dailymail)                                                       |
 | Language Modeling    | [WikiText-2](https://github.com/pomonam/kronfluence/tree/main/examples/wikitext) & [OpenWebText](https://github.com/pomonam/kronfluence/tree/main/examples/openwebtext) |
+| LLM Bias Evaluation  | [Anthropic HH / Bias](https://github.com/pomonam/kronfluence/tree/main/examples/AnthropicHH-Bias) |
 
 </div>
 
