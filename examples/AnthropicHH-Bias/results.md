@@ -1,13 +1,22 @@
-using bias loss as a performance function:
-1. loss on base 410m model: 0.513
-2. loss on full sft: 0.4871
-3. loss on random 45k samples: 0.4987
-4. loss on keeping lowest 45k ekfac scores: 0.5965
-5. loss on keeping highest 45k ekfac scores: 0.3727 
+# Bias-loss results
 
+Lower is better (negative log-likelihood on the Stereotypical Bias dev set).
 
-You can find the SFTed model LORA adapters at: 
+| Model / Training subset | Bias NLL |
+|-------------------------|---------:|
+| Base Pythia-410M | 0.513 |
+| SFT on full HH (45 k examples) | 0.4871 |
+| SFT on random 45 k examples | 0.4987 |
+| SFT on **lowest** 45 k EKFAC-ranked examples | 0.5965 |
+| SFT on **highest** 45 k EKFAC-ranked examples | **0.3727** |
+
+---
+
+## LoRA adapter checkpoints on Huggingface
+
+```text
 ncgc/pythia_410m_hh_full_sft_trainer
 ncgc/pythia_410m_sft_hh_random_45k
 ncgc/pythia_410m_sft_hh_45k_lowest.bias
 ncgc/pythia_410m_sft_hh_45k_highest.bias
+```
