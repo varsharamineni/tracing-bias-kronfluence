@@ -2,16 +2,22 @@
 The purpose of this script is to fit the factors for the pythia 410m model.
 '''
 
+import os
+import logging
+import numpy as np
+import torch
 from kronfluence.analyzer import Analyzer, prepare_model
 from kronfluence.arguments import FactorArguments
 from kronfluence.utils.common.factor_arguments import all_low_precision_factor_arguments
 from kronfluence.utils.dataset import DataLoaderKwargs
 from transformers import default_data_collator
-from task import *
-import numpy as np
-import os
-import logging
+from utils import get_anthropic_dataset
 from termcolor import colored
+from task import (
+    BiasTask,
+    model,
+    tokenizer
+)
     
 CHECKPOINT_DIR = "./checkpoints"
 FACTOR_STRATEGY = "ekfac"

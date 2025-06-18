@@ -24,7 +24,7 @@ def get_anthropic_dataset(tokenizer, split="train", indices=None):
     
         # ignore pads
         pad_id = tokenizer.pad_token_id
-        labels = [l if l != pad_id else -100 for l in labels]
+        labels = [label if label != pad_id else -100 for label in labels]
     
         tokens["labels"] = labels
         return tokens

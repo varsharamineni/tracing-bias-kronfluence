@@ -1,11 +1,13 @@
 '''
 Implements the task (the loss function on the Antrhopic Dataset, and the measurement function on the Bias Dataset)
 '''
-
-from utils import *
-from kronfluence.task import Task
-from transformers import AutoModelForCausalLM, AutoTokenizer
+from typing import Dict, List
+import torch
 import torch.nn as nn
+import torch.nn.functional as F
+from transformers import AutoModelForCausalLM, AutoTokenizer
+from kronfluence.task import Task
+from utils import bias_agreement_nll_loss
 
 BATCH_TYPE = Dict[str, torch.Tensor]
 NUM_BLOCKS = 1 # number of transformer layers blocks to consider while fetching modules

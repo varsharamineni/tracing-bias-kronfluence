@@ -1,10 +1,20 @@
 ''' 
 Implements computation of the pairwise scores for the pythia 410m model.
 '''
-
-from fit_all_factors import *
+import torch
 from kronfluence.arguments import ScoreArguments
 from kronfluence.utils.common.score_arguments import all_low_precision_score_arguments
+from fit_all_factors import (
+    factor_args,
+    USE_HALF_PRECISION,
+    USE_COMPILE,
+    COMPUTE_PER_TOKEN_SCORES,
+    QUERY_GRADIENT_RANK,
+    analyzer,
+    factors_name
+)
+from utils import get_anthropic_dataset, get_bias_agreement_dataset
+from task import tokenizer
 
 # Compute pairwise scores.
 
