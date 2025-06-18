@@ -87,13 +87,4 @@ All hyper-parameters (batch sizes, half-precision flag, etc.) live at the top of
 • GPU OOM during factor fitting → lower `initial_per_device_batch_size_attempt`
   in `fit_all_factors.py` (e.g. from *32* to *8*).
 
-• Want CPU-only? Set `USE_HALF_PRECISION=False` and `initial_per_device_batch_size_attempt=1` – it will be slow but still works.
-
 ---
-
-## 5&nbsp;·&nbsp;Citation
-
-If you use EKFAC influence functions in your work please cite:
-
-> G. Schioppa, et al. "Kronecker Influence: Efficient Influence Functions via
-> Kronecker-Factored Curvature Approximations". ICML 2024.
