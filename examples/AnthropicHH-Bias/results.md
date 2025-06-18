@@ -5,7 +5,7 @@ Lower is better (negative log-likelihood on the Stereotypical Bias dev set).
 | Model / Training subset | Bias NLL |
 |-------------------------|---------:|
 | Base Pythia-410M | 0.513 |
-| SFT on full HH (45 k examples) | 0.4871 |
+| SFT on full HH (96 k examples) | 0.4871 |
 | SFT on random 45 k examples | 0.4987 |
 | SFT on **lowest** 45 k EKFAC-ranked examples | 0.5965 |
 | SFT on **highest** 45 k EKFAC-ranked examples | **0.3727** |
