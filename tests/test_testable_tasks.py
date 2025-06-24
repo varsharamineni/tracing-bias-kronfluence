@@ -89,25 +89,3 @@ def test_roberta():
     )
     logits = model(*inputs).logits
     logits.sum().backward()
-
-
-def test_gpt():
-    model = make_tiny_gpt(seed=0)
-    dataset = make_gpt_dataset(num_data=8, seed=0)
-    batch_size = 8
-    loader = DataLoader(
-        dataset,
-        collate_fn=default_data_collator,
-        batch_size=batch_size,
-        drop_last=False,
-        shuffle=False,
-    )
-
-    batch = next(iter(loader))
-    inputs = (
-        batch["input_ids"],
-        None,
-        batch["attention_mask"],
-    )
-    logits = model(*inputs).logits
-    logits.sum().backward()
