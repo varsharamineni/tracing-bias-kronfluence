@@ -14,8 +14,8 @@ NUM_BLOCKS = 1 # number of transformer layers blocks to consider while fetching 
 NUM_TRANSFORMER_BLOCKS = 12 # total number of transformer layers blocks in the pythia 410 model
 MODEL_NAME = "EleutherAI/pythia-410m"
 
-model = AutoModelForCausalLM.from_pretrained(MODEL_NAME)
-tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, local_files_only=True)
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, local_files_only=True)
 tokenizer.pad_token = tokenizer.eos_token
 
 
