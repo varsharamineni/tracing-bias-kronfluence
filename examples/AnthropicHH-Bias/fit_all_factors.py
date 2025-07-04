@@ -50,7 +50,7 @@ model = prepare_model(model, task)
 if USE_COMPILE:
     model = torch.compile(model)
 analyzer = Analyzer(
-    analysis_name="bias_pythia_410m",
+    analysis_name="ncgc/pythia_410m_hh_full_sft_trainer",
     model=model,
     task=task,
     profile=PROFILE,

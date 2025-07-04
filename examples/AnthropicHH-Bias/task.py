@@ -12,7 +12,7 @@ from utils import bias_agreement_nll_loss
 BATCH_TYPE = Dict[str, torch.Tensor]
 NUM_BLOCKS = 1 # number of transformer layers blocks to consider while fetching modules
 NUM_TRANSFORMER_BLOCKS = 12 # total number of transformer layers blocks in the pythia 410 model
-MODEL_NAME = "EleutherAI/pythia-410m"
+MODEL_NAME = "ncgc/pythia_410m_hh_full_sft_trainer"
 
 model = AutoModelForCausalLM.from_pretrained(MODEL_NAME, local_files_only=True)
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, local_files_only=True)

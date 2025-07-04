@@ -5,7 +5,7 @@ import seaborn as sns
 import os
 
 def main():
-    scores_path = "./influence_results/bias_pythia_410m/scores_ekfac_half/pairwise_scores.safetensors"
+    scores_path = "./influence_results/ncgc/pythia_410m_hh_full_sft_trainer/scores_ekfac_half/pairwise_scores.safetensors"
 
     if not os.path.exists(scores_path):
         print(f"File not found: {scores_path}")
@@ -38,8 +38,26 @@ def main():
     plt.figure(figsize=(10, 8))
     sns.heatmap(influence_matrix.cpu().to(torch.float32).numpy(), cmap="viridis")
     plt.title("Influence Scores Heatmap")
-    plt.savefig("influence_heatmap.png")  # Save plot to file
+    plt.savefig("influence_heatmap_hh.png")  # Save plot to file
     plt.close()  # Close the figure to free memory
+    
+    import numpy as np
+
+    # influence_matrix: [num_train_examples, num_query_examples]
+    influence_np = influence_matrix.cpu().to(torch.float32).numpy()
+
+    query_index = 10  # ← change this to whichever query example you're analyzing
+    k = 10           # top-k influential documents to retrieve
+
+    # Get influence values for this query (column vector)
+    influences_for_query = influence_np[:, query_index]
+
+    # Get indices of top-k most influential training examples
+    topk_indices = np.argsort(influences_for_query)[::-1][:k]  # descending sort
+
+    print(f"Top {k} most influential training samples for query {query_index}:")
+    for i, idx in enumerate(topk_indices):
+        print(f"{i+1}: Index {idx} - Score {influences_for_query[idx]}")
     
 if __name__ == "__main__":
     main()

@@ -11,7 +11,7 @@ from peft import get_peft_model, LoraConfig, TaskType
 
 # ─── Configuration ─────────────────────────────────────────────────────────────
 # Paths
-os.environ["TRANSFORMERS_CACHE"] = ... # where to load the base model from..
+os.environ["TRANSFORMERS_CACHE"] = "/leonardo/home/userexternal/vraminen/.cache/huggingface/hub" # where to load the base model from..
 
 model_name   = "EleutherAI/pythia-410m"
 output_dir   = "pythia_410m_sft_hh_full_sft_trainer" # where to save the trained model
@@ -35,7 +35,8 @@ gradient_accumulation_steps  = 1
 
 tokenizer = AutoTokenizer.from_pretrained(
     model_name,
-    cache_dir=os.environ["TRANSFORMERS_CACHE"]
+    cache_dir=os.environ["TRANSFORMERS_CACHE"],
+    local_files_only=True
 )
 # Ensure pad token for causal LM
 tokenizer.pad_token = tokenizer.eos_token 
@@ -45,7 +46,8 @@ model = AutoModelForCausalLM.from_pretrained(
     device_map={"": device},  # Map all modules to cuda:0
     # Use float32 to avoid mixed precision issues
     torch_dtype=torch.float32,
-    cache_dir=os.environ["TRANSFORMERS_CACHE"]
+    cache_dir=os.environ["TRANSFORMERS_CACHE"],
+    local_files_only=True
 )  
 
 # ─── Apply LoRA (PEFT) ─────────────────────────────────────────────────────────
@@ -87,7 +89,7 @@ training_args = SFTConfig(
     # Disable fp16 to avoid mixed precision conflicts
     fp16=False,
     bf16=False,
-    push_to_hub=True,
+    push_to_hub=False,
     load_best_model_at_end=True,
     max_steps=-1,
     # Add evaluation and save strategies
@@ -96,9 +98,7 @@ training_args = SFTConfig(
     eval_steps=1000,
     save_steps=10000,
     save_total_limit=3,  # Keep only the last 3 checkpoints
-    report_to=["wandb"],
-    hub_token= ... # your huggingface token
-)
+    report_to=["wandb"])
 
 trainer = SFTTrainer(
     model=model,
@@ -106,6 +106,7 @@ trainer = SFTTrainer(
     train_dataset=train_dataset,
     eval_dataset=eval_dataset,
     args=training_args,
+    push_to_hub=False
 )
 
 # ─── Run Training ─────────────────────────────────────────────────────────────

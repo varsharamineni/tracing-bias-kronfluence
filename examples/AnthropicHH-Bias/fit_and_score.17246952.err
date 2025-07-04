@@ -1,0 +1,6 @@
+Using the latest cached version of the dataset since Dahoas/static-hh couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'default' at /leonardo/home/userexternal/vraminen/.cache/huggingface/datasets/Dahoas___static-hh/default/0.0.0/5f72aa2ee768ef6df7368bb78dcca0a654e0ff6c (last modified on Wed Jul  2 00:23:19 2025).
+Traceback (most recent call last):
+  File "/leonardo/home/userexternal/vraminen/tracing-bias-kronfluence/examples/AnthropicHH-Bias/SFT_Trainer_Lora.py", line 103, in <module>
+    trainer = SFTTrainer(
+TypeError: SFTTrainer.__init__() got an unexpected keyword argument 'push_to_hub'
